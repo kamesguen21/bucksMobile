@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Entry</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+
+    <ion-item>
+      <ion-label position="floating">Title</ion-label>
+      <ion-input type="text" #titleCtrl="ngModel" required name="title" [(ngModel)]="entry.title"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!titleCtrl.valid && titleCtrl.touched">
+      <ion-text color="danger">
+        title is required
+      </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Amount</ion-label>
+      <ion-input type="number" #amountCtrl="ngModel" required name="amount" color="danger" [min]="0.1" [max]="9999" [(ngModel)]="entry.amount"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!amountCtrl.valid && amountCtrl.touched">
+      <ion-text color="danger">
+        amount is required
+      </ion-text>
+    </ion-item>
+    <ion-button expand="block" [disabled]="!form.valid" type="submit">Save</ion-button>
+  </form>
+
+</ion-content>

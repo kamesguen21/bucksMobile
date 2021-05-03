@@ -1,0 +1,70 @@
+<div *ngIf="user && user.id">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-card class="ion-text-center">
+          <ion-card-content class="ion-no-padding">
+            <ion-grid>
+              <ion-row>
+                <ion-col class="ion-text-center">
+                  <div class="cash-div">
+                    <ion-icon name="add-circle" color="success" size="large"></ion-icon>
+                    <div class="cash-span">Total Cash In
+                      <div class=" text-big-bold ion-text-left">{{user.earned}}</div>
+                    </div>
+                  </div>
+                </ion-col>
+                <ion-col class="ion-text-center">
+                  <div class="cash-div">
+                    <ion-icon name="remove-circle" color="danger" size="large"></ion-icon>
+                    <div class="cash-span">Total Cash Out
+                      <div class="ion-text-left text-big-bold">{{user.spent}}</div>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class="ion-text-center">
+          <ion-card-content class="">
+            <h2 class="ion-float-left">Total Balance</h2>
+            <div class="ion-text-left text-big-bold ion-float-right">{{user.balance}}</div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="cash-div">
+          <ion-button size="large" color="success" class="full-width" (click)="presentModal('in')">
+            <ion-icon name="add-outline"></ion-icon>
+            Cash In
+          </ion-button>
+          <ion-button size="large" color="danger" class="full-width" (click)="presentModal('out')">
+            <ion-icon name="remove-outline"></ion-icon>
+            Cash Out
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-content
+      [scrollEvents]="true">
+      <div slot="fixed">
+        <h1>Fixed Content</h1>
+      </div>
+    </ion-content>
+    <ion-list>
+      <ion-item >
+
+      </ion-item>
+    </ion-list>
+
+  </ion-grid>
+
+
+</div>

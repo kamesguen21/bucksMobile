@@ -1,5 +1,7 @@
 {
   "name": "bucks",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

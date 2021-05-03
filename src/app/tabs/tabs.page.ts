@@ -1,12 +1,58 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserServiceService} from '../user/user-service.service';
+import {User} from '../user/User';
+import {NgForm} from '@angular/forms';
+import {DbService} from '../services/db.service';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss']
 })
-export class TabsPage {
+export class TabsPage implements OnInit {
+  user: User = null;
 
-  constructor() {}
 
+  constructor(
+    public userService: UserServiceService,
+    public dbService: DbService
+  ) {
+  }
+
+  ngOnInit() {
+    this.dbService.dbState().subscribe(val => {
+      if (val) {
+        this.userService.get().then(value => {
+          if (value && value.id) {
+            this.user = value;
+            console.log(this.user);
+          } else {
+            this.user = {};
+          }
+        }, error1 => {
+          console.log(error1);
+        });
+      }
+
+    }, error1 => {
+      console.log(error1);
+    });
+  }
+
+  save(form: NgForm) {
+    if (form.status === 'VALID') {
+      this.user.balance = 0;
+      this.user.earned = 0;
+      this.user.spent = 0;
+      this.userService.save(this.user).then(value => {
+        this.userService.get().then(val => {
+          this.user = val;
+          console.log(this.user);
+
+        });
+      }, error1 => {
+      });
+    }
+
+  }
 }
