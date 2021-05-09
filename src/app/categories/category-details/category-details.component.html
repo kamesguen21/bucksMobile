@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span>{{category.name}}</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" [scrollY]="true">
+  <div slot="fixed">
+    <div class="flex text-center">
+      <div class="ion-float-right">
+        <div class="text-big-bold">
+          Created: {{category.createdAt | date:'d MMM y h:mm a'}}
+
+        </div>
+        <div>
+          Updated: {{category.updatedAt | date:'d MMM y h:mm a'}}
+        </div>
+      </div>
+      <div class="ion-float-left">
+        <div class="text-big-bold">
+          Balance:   {{category.balance}}
+        </div>
+        <div>
+          <ion-icon [ngStyle]="{'background-color':category.color}" size="large"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let entry of category.entries">
+    <app-entry-view [entry]="entry"></app-entry-view>
+  </div>
+</ion-content>

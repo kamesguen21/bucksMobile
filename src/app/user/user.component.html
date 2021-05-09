@@ -52,19 +52,12 @@
         </div>
       </ion-col>
     </ion-row>
-    <ion-content
-      [scrollEvents]="true">
-      <div slot="fixed">
-        <h1>Fixed Content</h1>
-      </div>
-    </ion-content>
-    <ion-list>
-      <ion-item >
-
-      </ion-item>
-    </ion-list>
 
   </ion-grid>
-
-
+  <ion-content [scrollEvents]="true"  [scrollY]="true" >
+    <div *ngFor="let entry of entries">
+      <app-entry-view  [entry]="entry"></app-entry-view>
+    </div>
+  </ion-content>
 </div>
+

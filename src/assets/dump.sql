@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS category(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     color TEXT,
-    balance FLOAT,
-    date DATE
+    updatedAt DATE,
+    createdAt DATE
 );
+INSERT or IGNORE INTO category(id, name, color) VALUES (1, 'Default', '#3382FF');

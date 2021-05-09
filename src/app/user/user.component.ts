@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {UserServiceService} from './user-service.service';
-import {IUser, User} from './User';
+import {User} from './User';
 import {ModalController} from '@ionic/angular';
 import {EntryComponent} from '../entry/entry.component';
 import {EntryService} from '../entry/entry.service';
 import {Entry, IEntry} from '../entry/entry';
-import {v4 as uuidv4} from 'uuid';
 import {DbService} from '../services/db.service';
 
 @Component({
@@ -49,7 +48,6 @@ export class UserComponent implements OnInit {
   async presentModal(type: string) {
     const modal = await this.modalController.create({
       component: EntryComponent,
-      cssClass: 'my-custom-class',
       componentProps: {
         type
       }
@@ -65,18 +63,21 @@ export class UserComponent implements OnInit {
       console.log(data);
       const entry: IEntry = data.data.entry;
       console.log(entry);
-      this.entryService.save(entry).then(() => {
-        if (entry.type === 'in') {
-          this.user.earned += entry.amount;
-        }
-        if (entry.type === 'out') {
-          this.user.spent += entry.amount;
-        }
-        this.user.balance = this.user.earned - this.user.spent;
-        this.userService.save(this.user);
-        this.getEntries();
+      if (entry) {
+        this.entryService.save(entry).then(() => {
+          if (entry.type === 'in') {
+            this.user.earned += entry.amount;
+          }
+          if (entry.type === 'out') {
+            this.user.spent += entry.amount;
+          }
+          this.user.balance = this.user.earned - this.user.spent;
+          this.userService.put(this.user);
+          this.getEntries();
 
-      });
+        });
+      }
+
     });
   }
 

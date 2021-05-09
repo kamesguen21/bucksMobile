@@ -5,8 +5,13 @@ export interface ICategory {
   name?: string;
   color?: string;
   balance?: number;
-  date?: Date;
+  updatedAt?: Date;
+  createdAt?: Date;
   entries?: IEntry[];
+}
+export interface IColor {
+  selected?: boolean;
+  color?: string;
 }
 
 export class Category implements ICategory {
@@ -15,7 +20,8 @@ export class Category implements ICategory {
     public name?: string,
     public color?: string,
     public balance?: number,
-    public date?: Date,
+    public updatedAt?: Date,
+    public createdAt?: Date,
     public entries?: IEntry[]
   ) {
   }

@@ -1,0 +1,24 @@
+<ion-card (click)="openCategory()">
+  <ion-card-content>
+    <div class="flex text-center">
+      <div class="ion-float-right">
+        <div class="text-big-bold">
+          {{category.name}}
+        </div>
+        <div>
+          {{category.updatedAt | date:'d MMM y h:mm a'}}
+        </div>
+      </div>
+      <div class="ion-float-left">
+        <div class="text-big-bold">
+          {{category.balance}}
+        </div>
+        <div>
+          <ion-icon [ngStyle]="{'background-color':category.color}" size="large"></ion-icon>
+        </div>
+      </div>
+
+    </div>
+
+  </ion-card-content>
+</ion-card>

@@ -30,6 +30,10 @@ export class EntryService {
     return this.dbService.getEntries();
   }
 
+  getByCategoryId(id: number): Promise<IEntry[]> {
+    return this.dbService.getEntriesByCategoryId(id);
+  }
+
   getOne(id: string): Promise<IEntry> {
     return this.dbService.getEntry(id);
 

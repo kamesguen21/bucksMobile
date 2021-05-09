@@ -6,13 +6,14 @@ import {SQLitePorter} from '@ionic-native/sqlite-porter/ngx';
 import {SQLite, SQLiteObject} from '@ionic-native/sqlite/ngx';
 import {User} from '../user/User';
 import {Entry} from '../entry/entry';
+import {Category} from '../categories/category';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DbService {
-  private storage: SQLiteObject;
   user = new BehaviorSubject({});
+  private storage: SQLiteObject;
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
@@ -107,8 +108,28 @@ export class DbService {
       }
     });
   }
+
   getEntries(): Promise<Entry[]> {
     return this.storage.executeSql('SELECT * FROM entry', []).then(res => {
+      const items: Entry[] = [];
+      if (res.rows.length > 0) {
+        for (let i = 0; i < res.rows.length; i++) {
+          items.push({
+            id: res.rows.item(i).id,
+            amount: res.rows.item(i).amount,
+            date: res.rows.item(i).date,
+            title: res.rows.item(i).title,
+            type: res.rows.item(i).type,
+            categoryId: res.rows.item(i).categoryId
+          });
+        }
+      }
+      return items;
+    });
+  }
+
+  getEntriesByCategoryId(categoryId: number): Promise<Entry[]> {
+    return this.storage.executeSql('SELECT * FROM entry WHERE categoryId=' + categoryId, []).then(res => {
       const items: Entry[] = [];
       if (res.rows.length > 0) {
         for (let i = 0; i < res.rows.length; i++) {
@@ -144,6 +165,65 @@ export class DbService {
 
   deleteEntry(id) {
     return this.storage.executeSql('DELETE FROM entry WHERE id = ?', [id])
+      .then(_ => {
+      });
+  }
+
+  // Categories
+
+  getCategory(id): Promise<Category> {
+    return this.storage.executeSql('SELECT * FROM category WHERE id = ?', [id]).then(res => {
+      if (res && res.rows && res.rows.item(0)) {
+        return {
+          id: res.rows.item(0).id,
+          name: res.rows.item(0).name,
+          color: res.rows.item(0).color,
+          createdAt: res.rows.item(0).createdAt,
+          updatedAt: res.rows.item(0).updatedAt
+        };
+      } else {
+        return null;
+      }
+    });
+  }
+
+  getCategories(): Promise<Category[]> {
+    return this.storage.executeSql('SELECT * FROM category', []).then(res => {
+      const items: Category[] = [];
+      if (res.rows.length > 0) {
+        for (let i = 0; i < res.rows.length; i++) {
+          items.push({
+            id: res.rows.item(i).id,
+            name: res.rows.item(i).name,
+            color: res.rows.item(i).color,
+            createdAt: res.rows.item(i).createdAt,
+            updatedAt: res.rows.item(i).updatedAt
+          });
+        }
+      }
+      return items;
+    });
+  }
+
+  createCategory(category: Category) {
+    category.createdAt = new Date();
+    category.updatedAt = new Date();
+    const data = [category.name, category.color, category.createdAt, category.updatedAt];
+    return this.storage.executeSql('INSERT INTO category (name,color,createdAt,updatedAt) VALUES (?,?,?,?)', data)
+      .then(data2 => {
+      });
+  }
+  updateCategory(category: Category) {
+    category.updatedAt = new Date();
+    const data = [category.name, category.color, category.updatedAt];
+    return this.storage.executeSql(
+      `UPDATE category SET name = ?, color = ?, updatedAt = ?, WHERE id = ${category.id}`, data
+    )
+      .then(data2 => {
+      });
+  }
+  deleteCategory(id) {
+    return this.storage.executeSql('DELETE FROM category WHERE id = ?', [id])
       .then(_ => {
       });
   }

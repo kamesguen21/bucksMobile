@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span>Category</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<form #form="ngForm" (ngSubmit)="save(form)" novalidate>
+  <ion-button expand="block" [disabled]="!form.valid" type="submit">Save</ion-button>
+  <ion-item>
+    <ion-label position="floating">Name</ion-label>
+    <ion-input type="text" #nameCtrl="ngModel" name="name" required [(ngModel)]="category.name"></ion-input>
+  </ion-item>
+  <ion-item *ngIf="!nameCtrl.valid && nameCtrl.touched">
+    <ion-text color="danger">
+      Name is required
+    </ion-text>
+  </ion-item>
+  <ion-label>Color</ion-label>
+
+</form>
+<ion-content [scrollEvents]="true" [scrollX]="true" [scrollY]="false">
+  <div class="color-list">
+        <span *ngFor="let color of colors" class="colordvcon" [ngClass]="{'color-selected' : color.selected}" (click)="select(color.color)">
+            <ion-icon [ngStyle]="{'background-color':color.color,'font-size':'80px'}"></ion-icon>
+    </span>
+  </div>
+</ion-content>
+

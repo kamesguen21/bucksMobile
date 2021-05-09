@@ -1,3 +1,8 @@
-<p>
-  categories works!
-</p>
+<div>
+  <ion-button expand="block" type="submit" (click)="presentModal()">Add</ion-button>
+</div>
+<ion-content [scrollEvents]="true" [scrollY]="true">
+  <div *ngFor="let category of categories">
+    <app-category-view [category]="category"></app-category-view>
+  </div>
+</ion-content>
