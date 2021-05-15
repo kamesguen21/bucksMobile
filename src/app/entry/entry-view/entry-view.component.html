@@ -1,27 +1,29 @@
 <ion-card>
   <ion-card-content>
-    <div class="flex text-center">
-      <div class="ion-float-right">
-        <div>
-          {{entry.date | date:'d MMM y h:mm a'}}
-        </div>
-        <div class="text-big-bold">
-          {{entry.title}}
-        </div>
-      </div>
-      <div class="ion-float-left">
-        <div *ngIf="entry.type=='in'" >
-          {{entry.amount}}
-        </div>
-        <div *ngIf="entry.type=='out'">
-          {{entry.amount}}
-        </div>
-        <div>
-          main
-        </div>
-      </div>
-
-    </div>
-
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div >
+            <ion-text *ngIf="entry.type=='in'" color="success " class="text-big-bold">
+              {{entry.amount}}
+            </ion-text>
+            <ion-text *ngIf="entry.type=='out'" color="danger" class="text-big-bold">
+              {{entry.amount}}
+            </ion-text>
+            <div class="text-big-bold-2">
+              {{category.name}}
+            </div>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            {{entry.date | date:'d MMM y h:mm a'}}
+          </div>
+          <div class="pad-t-9">
+            {{entry.title}}
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card-content>
 </ion-card>

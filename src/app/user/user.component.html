@@ -54,7 +54,7 @@
     </ion-row>
 
   </ion-grid>
-  <ion-content [scrollEvents]="true"  [scrollY]="true" >
+  <ion-content [scrollEvents]="true"  [scrollY]="true" style="height: 200%;" >
     <div *ngFor="let entry of entries">
       <app-entry-view  [entry]="entry"></app-entry-view>
     </div>

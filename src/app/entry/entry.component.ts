@@ -44,6 +44,7 @@ export class EntryComponent implements OnInit {
     console.log(this.date);
     if (form.status === 'VALID') {
       this.entry.type = this.type;
+      this.entry.categoryId = this.entry.categoryId ? this.entry.categoryId : 1;
       this.modalCtrl.dismiss({
         dismissed: true,
         entry: this.entry,

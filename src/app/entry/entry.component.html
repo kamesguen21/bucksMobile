@@ -20,7 +20,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">Title</ion-label>
-      <ion-input type="text" #titleCtrl="ngModel" name="title" [(ngModel)]="entry.title"></ion-input>
+      <ion-input type="text" #titleCtrl="ngModel" name="title" [maxlength]="20" [(ngModel)]="entry.title"></ion-input>
     </ion-item>
     <ion-item *ngIf="!titleCtrl.valid && titleCtrl.touched">
       <ion-text color="danger">
@@ -39,7 +39,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Category</ion-label>
-      <ion-select [value]="entry.categoryId?entry.categoryId:1">
+      <ion-select [value]="entry.categoryId?entry.categoryId:1"   [(ngModel)]="entry.categoryId" name="categoryId">
         <ion-select-option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</ion-select-option>
       </ion-select>
     </ion-item>

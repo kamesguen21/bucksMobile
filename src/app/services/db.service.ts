@@ -171,7 +171,7 @@ export class DbService {
 
   // Categories
 
-  getCategory(id): Promise<Category> {
+  getCategory(id: number): Promise<Category> {
     return this.storage.executeSql('SELECT * FROM category WHERE id = ?', [id]).then(res => {
       if (res && res.rows && res.rows.item(0)) {
         return {
@@ -213,6 +213,7 @@ export class DbService {
       .then(data2 => {
       });
   }
+
   updateCategory(category: Category) {
     category.updatedAt = new Date();
     const data = [category.name, category.color, category.updatedAt];
@@ -222,6 +223,7 @@ export class DbService {
       .then(data2 => {
       });
   }
+
   deleteCategory(id) {
     return this.storage.executeSql('DELETE FROM category WHERE id = ?', [id])
       .then(_ => {

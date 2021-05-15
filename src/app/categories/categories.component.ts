@@ -23,6 +23,11 @@ export class CategoriesComponent implements OnInit {
     this.getCategories();
   }
 
+  ionViewDidEnter() {
+    console.log('hello category');
+    this.getCategories();
+  }
+
   async presentModal() {
     const modal = await this.modalController.create({
       component: CategoryAddComponent,

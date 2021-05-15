@@ -1,7 +1,9 @@
-<div>
-  <ion-button expand="block" type="submit" (click)="presentModal()">Add</ion-button>
-</div>
 <ion-content [scrollEvents]="true" [scrollY]="true">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <div *ngFor="let category of categories">
     <app-category-view [category]="category"></app-category-view>
   </div>

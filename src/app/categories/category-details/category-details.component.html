@@ -10,30 +10,29 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [scrollEvents]="true" [scrollY]="true">
-  <div slot="fixed">
-    <div class="flex text-center">
-      <div class="ion-float-right">
-        <div class="text-big-bold">
-          Created: {{category.createdAt | date:'d MMM y h:mm a'}}
-
-        </div>
-        <div>
-          Updated: {{category.updatedAt | date:'d MMM y h:mm a'}}
-        </div>
+<div class="center-text">
+  <div>
+    <div class="">
+      <div class="text-big-bold">
+        <ion-icon [ngStyle]="{'color':category.color}" size="large" name="ellipse"></ion-icon> <span class="text-big">{{category.balance}}</span>
       </div>
-      <div class="ion-float-left">
-        <div class="text-big-bold">
-          Balance:   {{category.balance}}
-        </div>
-        <div>
-          <ion-icon [ngStyle]="{'background-color':category.color}" size="large"></ion-icon>
-        </div>
+    </div>
+    <div class="">
+      <div *ngIf="category.createdAt">
+        Created: {{category.createdAt | date:'d MMM y h:mm a'}}
+      </div>
+      <div *ngIf="category.updatedAt">
+        Updated: {{category.updatedAt | date:'d MMM y h:mm a'}}
       </div>
     </div>
   </div>
-  <div *ngFor="let entry of category.entries">
-    <app-entry-view [entry]="entry"></app-entry-view>
+</div>
+<ion-content [scrollEvents]="true" [scrollY]="true">
+
+  <div class="margin-top-20">
+    <div *ngFor="let entry of category.entries">
+      <app-entry-view [entry]="entry"></app-entry-view>
+    </div>
   </div>
+
 </ion-content>

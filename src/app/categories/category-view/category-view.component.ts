@@ -22,6 +22,7 @@ export class CategoryViewComponent implements OnInit {
 
   ngOnInit() {
     this.entryService.getByCategoryId(this.category.id).then(entries => {
+      console.log(entries);
       this.category.entries = entries;
       let amount = 0;
       for (const entry of entries) {

@@ -29,7 +29,7 @@ export class CategoriesService {
     return this.dbService.getCategories();
   }
 
-  getOne(id: string): Promise<ICategory> {
+  getOne(id: number): Promise<ICategory> {
     return this.dbService.getCategory(id);
 
   }

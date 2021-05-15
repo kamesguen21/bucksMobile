@@ -21,4 +21,4 @@ CREATE TABLE IF NOT EXISTS category(
     updatedAt DATE,
     createdAt DATE
 );
-INSERT or IGNORE INTO category(id, name, color) VALUES (1, 'Default', '#3382FF');
+INSERT or IGNORE INTO category(id, name, color) VALUES (1, 'Main Category', '#3382FF');

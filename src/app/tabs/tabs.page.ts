@@ -11,6 +11,7 @@ import {DbService} from '../services/db.service';
 })
 export class TabsPage implements OnInit {
   user: User = null;
+  emailPattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
 
   constructor(
