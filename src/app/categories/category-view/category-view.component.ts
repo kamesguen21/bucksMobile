@@ -5,6 +5,8 @@ import {EntryService} from '../../entry/entry.service';
 import {CategoryAddComponent} from '../category-add/category-add.component';
 import {ModalController} from '@ionic/angular';
 import {CategoryDetailsComponent} from '../category-details/category-details.component';
+import {CategoriesService} from '../categories.service';
+import {UserServiceService} from '../../user/user-service.service';
 
 @Component({
   selector: 'app-category-view',
@@ -13,10 +15,12 @@ import {CategoryDetailsComponent} from '../category-details/category-details.com
 })
 export class CategoryViewComponent implements OnInit {
   @Input() category: ICategory;
+  currency = '';
 
   constructor(
     public entryService: EntryService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    public  userServiceService: UserServiceService
   ) {
   }
 
@@ -35,6 +39,15 @@ export class CategoryViewComponent implements OnInit {
         }
       }
       this.category.balance = amount;
+    });
+    this.userServiceService.get().then(res => {
+      if (res && res.id && res.currency) {
+        this.userServiceService.getCurrency(res.currency).then(cur => {
+          if (cur) {
+            this.currency = cur.symbol;
+          }
+        });
+      }
     });
   }
 

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {IUser, User} from './User';
+import {ICurrency, IUser, User} from './User';
 import {Observable} from 'rxjs';
 import {DbService} from '../services/db.service';
 
@@ -24,6 +24,13 @@ export class UserServiceService {
 
   get(): Promise<User> {
     return this.dbService.getUser();
+  }
 
+  getCurrencies(): Promise<ICurrency[]> {
+    return this.dbService.getCurrencies();
+  }
+
+  getCurrency(key: string): Promise<ICurrency> {
+    return this.dbService.getCurrency(key);
   }
 }

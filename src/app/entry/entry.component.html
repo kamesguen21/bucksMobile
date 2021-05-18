@@ -15,7 +15,7 @@
   <form #form="ngForm" (ngSubmit)="save(form)" novalidate>
     <ion-item>
       <ion-label>Date</ion-label>
-      <ion-datetime displayFormat="YYYY MM DD a" placeholder="Select Date" name="date"
+      <ion-datetime displayFormat="DD MMM YYYY" placeholder="Select Date" name="date" pickerFormat="DD MMM YYYY"
                     [(ngModel)]="entry.date"></ion-datetime>
     </ion-item>
     <ion-item>

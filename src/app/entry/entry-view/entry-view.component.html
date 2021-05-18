@@ -5,10 +5,10 @@
         <ion-col>
           <div >
             <ion-text *ngIf="entry.type=='in'" color="success " class="text-big-bold">
-              {{entry.amount}}
+              {{entry.amount}}{{currency}}
             </ion-text>
             <ion-text *ngIf="entry.type=='out'" color="danger" class="text-big-bold">
-              {{entry.amount}}
+              {{entry.amount}}{{currency}}
             </ion-text>
             <div class="text-big-bold-2">
               {{category.name}}

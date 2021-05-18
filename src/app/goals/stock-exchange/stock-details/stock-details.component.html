@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span>Stocks Details</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+
+  <ion-card *ngIf="tickerDetails">
+    <img [src]="tickerDetails.logo" style="width:100%"/>
+    <ion-card-header>
+      <ion-card-subtitle>COMPANY PROFILE</ion-card-subtitle>
+      <ion-card-title>{{tickerDetails.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid *ngIf="tickerDetails">
+        <ion-row>
+          <ion-col>
+            <ion-card-subtitle>DESCRIPTION</ion-card-subtitle>
+            <p>{{tickerDetails.description}}</p>
+            <ion-card-subtitle>URL</ion-card-subtitle>
+            <a [href]="tickerDetails.url">{{tickerDetails.url}}</a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-card-subtitle>COUNTRY</ion-card-subtitle>
+            <p>{{tickerDetails.country}}</p>
+          </ion-col>
+          <ion-col>
+            <ion-card-subtitle>INDUSTRY</ion-card-subtitle>
+            <p>{{tickerDetails.industry}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-card-subtitle>SECTOR</ion-card-subtitle>
+            <p>{{tickerDetails.sector}}</p>
+          </ion-col>
+          <ion-col>
+            <ion-card-subtitle>marketcap</ion-card-subtitle>
+            <p>{{tickerDetails.marketcap}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-card-subtitle>employees</ion-card-subtitle>
+            <p>{{tickerDetails.employees}}</p>
+          </ion-col>
+          <ion-col>
+            <ion-card-subtitle>PHONE</ion-card-subtitle>
+            <p>{{tickerDetails.phone}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-card-subtitle>CEO</ion-card-subtitle>
+            <p>{{tickerDetails.ceo}}</p>
+          </ion-col>
+          <ion-col>
+            <ion-card-subtitle>HQ ADDRESS</ion-card-subtitle>
+            <p>{{tickerDetails.hq_address}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-card-subtitle>HQ STATE</ion-card-subtitle>
+            <p>{{tickerDetails.hq_state}}</p>
+          </ion-col>
+          <ion-col>
+            <ion-card-subtitle>UPDATED</ion-card-subtitle>
+            <p>{{tickerDetails.updated}}</p>
+          </ion-col>
+        </ion-row>
+
+
+      </ion-grid>
+
+
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="!tickerDetails" class="text-mid">
+    <h1 *ngIf="loading">Collecting data...</h1>
+    <h1 *ngIf="!loading">No details Available</h1>
+  </div>
+</ion-content>

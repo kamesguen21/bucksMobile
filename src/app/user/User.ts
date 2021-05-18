@@ -20,3 +20,20 @@ export class User implements IUser {
   ) {
   }
 }
+
+export interface ICurrency {
+  key?: string;
+  name?: string;
+  symbol?: string;
+  flag?: string;
+}
+
+export class Currency implements ICurrency {
+  constructor(
+    public key?: string,
+    public name?: string,
+    public symbol?: string,
+    public flag?: string,
+  ) {
+  }
+}

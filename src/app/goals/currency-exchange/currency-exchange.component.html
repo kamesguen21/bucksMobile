@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span>Currency Exchange Rates</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="currencyExchange()" [disabled]="!(this.fullExchangeRates.length>0)">
+      <ion-icon [src]="path+'sync-alt-solid.svg'"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div class="text-big-bold">
+    <ion-card class="m-0 ion-text-center">
+      <ion-card-content class="p-0 ion-text-center" *ngIf="user && userCurrency">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div>
+                <div class="text-big-bold-2">
+                  <ion-icon size="large" [src]="path+userCurrency.flag"></ion-icon>
+                </div>
+                <div class="text-big-bold-2">
+                  {{userCurrency.key}}
+                </div>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div>
+                {{userCurrency.name}}
+              </div>
+              <div>
+                1
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-searchbar [(ngModel)]="searchQuery" (ionChange)="handleSearch()"></ion-searchbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let rate of exchangeRates">
+        <ion-card class="m-0 ion-text-center" *ngIf="!rate.hide" (click)="switchBase(rate.to)">
+          <ion-card-content class="p-0 ion-text-center">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <div>
+                    <div class="text-big-bold-2" *ngIf="rate.currency && rate.currency.flag">
+                      <ion-icon size="medium" [src]="path+rate.currency.flag"></ion-icon>
+                    </div>
+                    <div class="text-big-bold-2">
+                      {{rate.currency ? rate.currency.key : rate.to.toUpperCase()}}
+                    </div>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <div>
+                    <ion-text *ngIf="rate.changePerc==0" color="primary" class="text-big-bold">
+                      {{rate.changePerc | number:'1.0-4'}}%
+                    </ion-text>
+                    <ion-text *ngIf="rate.changePerc>0" color="success " class="text-big-bold">
+                      +{{rate.changePerc | number:'1.0-4'}}%
+                    </ion-text>
+                    <ion-text *ngIf="rate.changePerc<0" color="danger" class="text-big-bold">
+                      {{rate.changePerc | number:'1.0-4'}}%
+                    </ion-text>
+                  </div>
+                  <div class="">
+                    {{rate.value | number:'1.0-4'}}
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

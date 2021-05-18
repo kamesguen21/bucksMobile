@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserServiceService} from '../user/user-service.service';
-import {User} from '../user/User';
+import {ICurrency, User} from '../user/User';
 import {NgForm} from '@angular/forms';
 import {DbService} from '../services/db.service';
 
@@ -12,6 +12,7 @@ import {DbService} from '../services/db.service';
 export class TabsPage implements OnInit {
   user: User = null;
   emailPattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+  currencies: ICurrency[];
 
 
   constructor(
@@ -33,6 +34,11 @@ export class TabsPage implements OnInit {
         }, error1 => {
           console.log(error1);
         });
+        this.userService.getCurrencies().then(res => {
+          if (res) {
+            this.currencies = res;
+          }
+        });
       }
 
     }, error1 => {
@@ -45,6 +51,9 @@ export class TabsPage implements OnInit {
       this.user.balance = 0;
       this.user.earned = 0;
       this.user.spent = 0;
+      if (!this.user.currency) {
+        this.user.currency = 'USD';
+      }
       this.userService.save(this.user).then(value => {
         this.userService.get().then(val => {
           this.user = val;

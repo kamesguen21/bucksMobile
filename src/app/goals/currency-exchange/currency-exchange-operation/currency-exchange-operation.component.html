@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span >Currency Exchange</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="convert(form)" novalidate >
+
+    <ion-item>
+      <ion-label position="floating">Amount</ion-label>
+      <ion-input type="number" max="9999" min="0.1" #amountCtrl="ngModel"  required name="amount" [(ngModel)]="exchangeOperation.amount"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!amountCtrl.valid && amountCtrl.touched">
+      <ion-text color="danger">
+        amount is required
+      </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>from</ion-label>
+      <ion-select [value]="exchangeOperation.from"   [(ngModel)]="exchangeOperation.from" name="from">
+        <ion-select-option *ngFor="let curr of currencies" [value]="curr.key"> <ion-icon [src]="path+curr.flag"></ion-icon>{{curr.key}}-{{curr.name}} </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>to</ion-label>
+      <ion-select [value]="exchangeOperation.to"   [(ngModel)]="exchangeOperation.to" name="to">
+        <ion-select-option *ngFor="let curr of currencies" [value]="curr.key"> <ion-icon [src]="path+curr.flag"></ion-icon>{{curr.key}}-{{curr.name}} </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Result</ion-label>
+      <ion-input type="text"   name="result" [readonly]="true" [(ngModel)]="result"></ion-input>
+    </ion-item>
+    <ion-button expand="block" [disabled]="!form.valid" type="submit">Convert</ion-button>
+  </form>
+
+</ion-content>

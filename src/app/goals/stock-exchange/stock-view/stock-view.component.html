@@ -1,0 +1,44 @@
+<ion-card class="m-0 ion-text-center" *ngIf="ticker && ticker.ticker" (click)="viewDetails()">
+  <ion-card-content class="p-0 ion-text-center">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div>
+            <div class="text-big-bold-2">
+              {{ticker.ticker}}
+            </div>
+            <ion-text *ngIf="ticker.todaysChangePerc==0" color="primary" class="text-big-bold">
+              {{ticker.todaysChangePerc| number:'1.0-4'}}%
+            </ion-text>
+            <ion-text *ngIf="ticker.todaysChangePerc>0" color="success" class="text-big-bold">
+              <ion-icon name="caret-up" color="success"></ion-icon>
+              {{ticker.todaysChangePerc| number:'1.0-4'}}%
+            </ion-text>
+            <ion-text *ngIf="ticker.todaysChangePerc<0" color="danger" class="text-big-bold">
+              <ion-icon name="caret-down" color="danger"></ion-icon>
+              {{ticker.todaysChangePerc| number:'1.0-4'}}%
+            </ion-text>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <div class="text-big-bold-2">
+              ${{ticker.closeVal | number:'1.0-5'}}
+            </div>
+          </div>
+          <div class="">
+            <ion-text *ngIf="ticker.todaysChange==0" color="primary" class="text-big-bold">
+              (${{ticker.todaysChangePerc| number:'1.0-4'}})
+            </ion-text>
+            <ion-text *ngIf="ticker.todaysChange>0" color="success" class="text-big-bold">
+              (${{ticker.todaysChangePerc| number:'1.0-4'}})
+            </ion-text>
+            <ion-text *ngIf="ticker.todaysChange<0" color="danger" class="text-big-bold">
+              (${{ticker.todaysChangePerc| number:'1.0-4'}})
+            </ion-text>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

@@ -10,6 +10,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {EntryModule} from './entry/entry.module';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
   providers: [
     SQLite,
     SQLitePorter,
+    DatePipe,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy

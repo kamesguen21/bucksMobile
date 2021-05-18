@@ -10,7 +10,7 @@
                   <div class="cash-div">
                     <ion-icon name="add-circle" color="success" size="large"></ion-icon>
                     <div class="cash-span">Total Cash In
-                      <div class=" text-big-bold ion-text-left">{{user.earned}}</div>
+                      <div class=" text-big-bold ion-text-left">{{user.earned}}{{currency}}</div>
                     </div>
                   </div>
                 </ion-col>
@@ -18,7 +18,7 @@
                   <div class="cash-div">
                     <ion-icon name="remove-circle" color="danger" size="large"></ion-icon>
                     <div class="cash-span">Total Cash Out
-                      <div class="ion-text-left text-big-bold">{{user.spent}}</div>
+                      <div class="ion-text-left text-big-bold">{{user.spent}}{{currency}}</div>
                     </div>
                   </div>
                 </ion-col>
@@ -33,7 +33,7 @@
         <ion-card class="ion-text-center">
           <ion-card-content class="">
             <h2 class="ion-float-left">Total Balance</h2>
-            <div class="ion-text-left text-big-bold ion-float-right">{{user.balance}}</div>
+            <div class="ion-text-left text-big-bold ion-float-right">{{user.balance}}{{currency}}</div>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -54,9 +54,9 @@
     </ion-row>
 
   </ion-grid>
-  <ion-content [scrollEvents]="true"  [scrollY]="true" style="height: 200%;" >
+  <ion-content [scrollEvents]="true" [scrollY]="true" style="height: 200%;">
     <div *ngFor="let entry of entries">
-      <app-entry-view  [entry]="entry"></app-entry-view>
+      <app-entry-view [entry]="entry"></app-entry-view>
     </div>
   </ion-content>
 </div>

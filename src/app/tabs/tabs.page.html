@@ -11,7 +11,7 @@
         <ion-label>Categories</ion-label>
       </ion-tab-button>
       <ion-tab-button tab="goals">
-        <ion-icon name="earth"></ion-icon>
+        <ion-icon name="construct"></ion-icon>
         <ion-label>Tools</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
@@ -45,6 +45,12 @@
             <ion-text color="danger">
               email is required
             </ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>Currency</ion-label>
+            <ion-select [value]="user.currency?user.currency:1"   [(ngModel)]="user.currency" name="currency">
+              <ion-select-option *ngFor="let curr of currencies" [value]="curr.key">{{curr.symbol}}-{{curr.name}} </ion-select-option>
+            </ion-select>
           </ion-item>
           <ion-button expand="block" [disabled]="!form.valid" type="submit">Save</ion-button>
         </form>

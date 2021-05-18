@@ -15,6 +15,7 @@ import {DbService} from '../services/db.service';
 export class UserComponent implements OnInit {
   user: User = null;
   entries: Entry[] = [];
+  currency = '';
 
   constructor(
     public userService: UserServiceService,
@@ -32,6 +33,12 @@ export class UserComponent implements OnInit {
             this.user = value;
             this.getEntries();
             console.log(this.user);
+            this.userService.getCurrency(value.currency).then(cur => {
+              if (cur) {
+                this.currency = cur.symbol;
+              }
+            });
+
           } else {
             this.user = {};
           }

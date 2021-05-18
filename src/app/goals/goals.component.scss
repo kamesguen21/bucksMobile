@@ -1,0 +1,33 @@
+.fifty-perc {
+  height: 50%;
+}
+
+.text-big-bold {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.text-mid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.foreign-exchange {
+  background-image: url('../../assets/icon/foreign-exchange-white.svg');
+  background-repeat: round;
+  background-color: #EB445A;
+  border-bottom: 5px solid black;
+  border-top: 5px solid black;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+}
+
+.stock {
+  background-image: url('../../assets/icon/analysis-white.svg');
+  background-repeat: round;
+  background-color: #5260FF;
+  border-bottom: 5px solid black;
+  border-left: 5px solid black;
+  border-right: 5px solid black;
+}
